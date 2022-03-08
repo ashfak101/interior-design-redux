@@ -5,7 +5,7 @@ import bgImg from "../../../images/courses.png";
 import IntButton from "../../Utils/IntButton";
 import SharedGrid from "../SharedGrid/SharedGrid";
 import { Link } from "react-router-dom";
-import  {useDispatch} from 'react-redux'
+import  {useDispatch, useSelector} from 'react-redux'
 import { fetchBlogs } from "../../../redux/actions/blogsAction";
 const bgImage = {
   background: `url(${bgImg})`,
@@ -14,18 +14,19 @@ const bgImage = {
   backgroundRepeat: "no-repeat",
 };
 function HomeBlogs() {
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
   const dispatch = useDispatch()
-
+  const blogs = useSelector((state) => state.allBlogs.blogs);
+ console.log(blogs);
 
   useEffect(() => {
     dispatch( fetchBlogs());
   },[dispatch]);
-  useEffect(() => {
-    fetch("blogs.json")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("blogs.json")
+  //     .then((res) => res.json())
+  //     .then((data) => setBlogs(data));
+  // }, []);
   return (
     <Box sx={bgImage}>
       <Box
@@ -50,7 +51,7 @@ function HomeBlogs() {
       >
         <Grid container spacing={1} sx={{ marginBottom: "50px" }}>
           {blogs.slice(0, 3).map((blog) => (
-            <SharedGrid key={blog.id} data={blog}></SharedGrid>
+           <SharedGrid key={blog.id} data={blog}></SharedGrid>
           ))}
         </Grid>
         <Link style={{ textDecoration: "none" }} to="/blogs">
