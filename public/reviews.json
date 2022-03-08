@@ -1,0 +1,75 @@
+[
+    {
+        "id": "1",
+        "img":"image/person.jpg",
+        "name": "Картофель",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "3",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "4",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "2",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "5",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "6",
+        "name": "Картофель", "img":"image/person.png",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "7",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "8",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    },
+    {
+        "id": "9",
+        "name": "Картофель",  "img":"image/person.jpg",
+        "description": "But I must explain to you how all this mistaken idea of denouncing pleasur and praising pain was itbe born and I will expound the actual.",
+        "person": "students",
+        "rating": "4"
+
+    }
+]
