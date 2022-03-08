@@ -8,12 +8,15 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { DataContext } from "../../context/DataProvider";
-import React, { useContext } from "react";
+
+import React from "react";
 import CartItem from "./CartItem";
+import { useSelector } from "react-redux";
 
 function ShoppingCart({ finalTotal, setFinalTotal }) {
-  const [state] = useContext(DataContext);
+  // const [state] = useContext(DataContext);
+
+  const  cart  = useSelector((state) => state.allCart.cart);
   return (
     <>
       <Paper sx={{ width: "100%", boxShadow: "none" }}>
@@ -32,7 +35,7 @@ function ShoppingCart({ finalTotal, setFinalTotal }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {state.cart?.map((cd) => (
+              {cart?.map((cd) => (
                 <CartItem
                   key={cd.id}
                   finalTotal={finalTotal}

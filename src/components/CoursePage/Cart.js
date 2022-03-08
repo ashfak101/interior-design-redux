@@ -1,47 +1,50 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
-import { DataContext } from "../../context/DataProvider";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addDiscount, addVat, setSubTotal } from "../../redux/actions/cartActions";
 
 function Cart({ finalTotal }) {
-  const [state, dispatch] = useContext(DataContext);
+  // const [state, dispatch] = useContext(DataContext);
+  const  disCountPrice = useSelector((state) => state.allCart.disCountPrice)
+  const dispatch =useDispatch()
   const [text, setText] = useState("");
   const [disCount, setDiscount] = useState(false);
   const vat = finalTotal * 0.15;
   let total = finalTotal + vat;
-
+    const allCart = useSelector((state) => state.allCart);
   const handleDiscount = () => {
     if (text === "apex") {
       let discoutTotal = total / 2;
       setDiscount(true);
-      dispatch({
-        type: "discount",
-        value: discoutTotal,
-      });
+      dispatch(
+        addDiscount(discoutTotal)
+        );
     }
   };
   const handleDisDelete = () => {
     setDiscount(false);
-    dispatch({
-      type: "discount",
-      value: total,
-    });
+    dispatch(
+      addDiscount(total));
   };
   // console.log(state.disCountPrice);
   //   setTotalPrice(total);
   //   console.log(totalPrice);
   useEffect(() => {
-    dispatch({
-      type: "discount",
-      value: total,
-    });
-    dispatch({
-      type: "vat",
-      value: vat,
-    });
+    dispatch(
+       addDiscount(total));
+    dispatch(addVat(vat));
   }, [total, dispatch, vat]);
   // console.log(text);
+  useEffect(() => {
+    if(allCart.cart.length===0){
+       dispatch(setSubTotal(0));
+       dispatch(addVat(0))
+       dispatch(addDiscount(0))
+    }
+  } , [allCart.cart, dispatch])
   return (
     <Box
       sx={{
@@ -87,7 +90,7 @@ function Cart({ finalTotal }) {
         }}
       >
         <Typography>Subtotal</Typography>
-        <Typography>${finalTotal}</Typography>
+        <Typography>${allCart.subTotal}</Typography>
       </Box>
       <Box
         sx={{
@@ -100,7 +103,7 @@ function Cart({ finalTotal }) {
         }}
       >
         <Typography>Vat</Typography>
-        <Typography>${vat}</Typography>
+        <Typography>${allCart.vat}</Typography>
       </Box>
       <Box
         sx={{
@@ -112,7 +115,8 @@ function Cart({ finalTotal }) {
         }}
       >
         <Typography>Total</Typography>
-        <Typography>${state.disCountPrice}</Typography>
+        <Typography>${
+        disCountPrice}</Typography>
       </Box>
       <Button variant="contained" sx={{ width: "100%" }}>
         <Link style={{ textDecoration: "none", color: "white" }} to="/checkout">

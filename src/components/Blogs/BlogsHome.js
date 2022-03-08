@@ -11,20 +11,22 @@ import Stack from "@mui/material/Stack";
 import BlogsCourse from "./BlogsCourse";
 import Login from "../Login/Login/Login";
 import Register from "../Login/Register/Register";
+import { useSelector } from "react-redux";
 function BlogsHome() {
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage] = useState(6);
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [isClick, setIsClick] = useState(false);
-  useEffect(() => {
-    fetch("/blogs.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogs(data);
-      });
-  }, []);
+  const blogs = useSelector((state) => state.allBlogs.blogs)
+  // useEffect(() => {
+  //   fetch("/blogs.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setBlogs(data);
+  //     });
+  // }, []);
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlog = blogs.slice(indexOfFirstBlog, indexOfLastBlog);

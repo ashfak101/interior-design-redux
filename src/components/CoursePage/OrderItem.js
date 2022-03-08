@@ -8,13 +8,14 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 
-import { DataContext } from "../../context/DataProvider";
+
 function OrderItem() {
-  const [state] = useContext(DataContext);
+  // const [state] = useContext(DataContext);
+  const allCart  =useSelector((state) => state.allCart);
 
-  console.log(state.finalTotal);
+  // console.log(state.finalTotal);
   return (
     <Box
       sx={{
@@ -49,7 +50,7 @@ function OrderItem() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {state.cart.map((row) => (
+              {allCart.cart.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.courseName}</TableCell>
                   <TableCell align="right"></TableCell>
@@ -63,16 +64,16 @@ function OrderItem() {
               <TableRow>
                 <TableCell rowSpan={3} />
                 <TableCell colSpan={2}>Subtotal</TableCell>
-                <TableCell align="right">${state.finalTotal}</TableCell>
+                <TableCell align="right">${allCart.subTotal}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell />
                 <TableCell>Tax</TableCell>
-                <TableCell align="right">${state.vat}</TableCell>
+                <TableCell align="right">${allCart.vat}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell colSpan={2}>Total</TableCell>
-                <TableCell align="right">${state.disCountPrice}</TableCell>
+                <TableCell align="right">${allCart.disCountPrice}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

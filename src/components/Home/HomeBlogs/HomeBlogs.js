@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Title from "../../Utils/Title";
 import bgImg from "../../../images/courses.png";
 import IntButton from "../../Utils/IntButton";
@@ -22,11 +22,7 @@ function HomeBlogs() {
   useEffect(() => {
     dispatch( fetchBlogs());
   },[dispatch]);
-  // useEffect(() => {
-  //   fetch("blogs.json")
-  //     .then((res) => res.json())
-  //     .then((data) => setBlogs(data));
-  // }, []);
+ 
   return (
     <Box sx={bgImage}>
       <Box

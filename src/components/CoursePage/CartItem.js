@@ -1,14 +1,17 @@
 import { Box, TableCell, TableRow, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { DataContext } from "../../context/DataProvider";
-import DeleteIcon from "@mui/icons-material/Delete";
-function CartItem({ cd, setFinalTotal }) {
-  const [state, dispatch] = useContext(DataContext);
-  const [quantity, setQuantity] = useState(cd.quantity);
-  let total = cd.quantity * cd.price;
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useDispatch, useSelector } from "react-redux";
+import {  deletFromCart, setSubTotal } from "../../redux/actions/cartActions";
+function CartItem({ cd, setFinalTotal }) {
+  
+  const [quantity, setQuantity] = useState(cd.quantity);
+  const cart  = useSelector((state) => state.allCart.cart);
+  let total = cd.quantity * cd.price;
+  const dispatch = useDispatch()
   const increaseQuantity = () => {
     setQuantity((cd.quantity += 1));
   };
@@ -19,7 +22,7 @@ function CartItem({ cd, setFinalTotal }) {
   };
   let totalQuantity = 0;
   let allTotal = 0;
-  for (const i of state.cart) {
+  for (const i of cart) {
     if (!i.quantity) {
       i.quantity = 1;
     } else {
@@ -30,21 +33,14 @@ function CartItem({ cd, setFinalTotal }) {
   setFinalTotal(allTotal);
   console.log(quantity);
   const handleRemoveCart = (id) => {
-    const remaining = state.cart?.filter((cd) => cd.id !== id);
-
-    dispatch({
-      type: "cart",
-      value: remaining,
-    });
+    dispatch(deletFromCart(id));
   };
   useEffect(() => {
-    dispatch({
-      type: "finalTotal",
-      value: allTotal,
-    });
+    dispatch(setSubTotal(allTotal));
   }, [allTotal, dispatch]);
-
-  console.log(state.cart);
+ 
+  
+  console.log(cart);
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>

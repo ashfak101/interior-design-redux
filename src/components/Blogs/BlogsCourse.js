@@ -6,19 +6,16 @@ import {
   Container,
   Typography,
 } from "@mui/material";
-import React, { useState, useEffect, useRef } from "react";
+import React, {useRef } from "react";
 import Slider from "react-slick";
 import PersonIcon from "@mui/icons-material/Person";
-import StarRateIcon from "@mui/icons-material/StarRate";
+
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useSelector } from "react-redux";
 function BlogsCourse() {
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    fetch("course.json")
-      .then((res) => res.json())
-      .then((data) => setCourses(data));
-  }, [setCourses]);
+  const courses = useSelector((state) => state.allCourse.courses); 
+
 
   const silder = useRef(null);
   let settings = {

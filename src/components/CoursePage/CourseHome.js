@@ -1,39 +1,42 @@
 import { Box } from "@mui/material";
-import React, { useContext, useState } from "react";
-import { DataContext } from "../../context/DataProvider";
+import React, { useState } from "react";
+// import {  } from "../../context/DataProvider";
 import Login from "../Login/Login/Login";
 import Register from "../Login/Register/Register";
 import Footer from "../Shared/Footer/Footer";
 import Header from "../Shared/Header/Header";
-
+import {useDispatch, useSelector} from 'react-redux'
 import CourseDetails from "./CourseDetails";
 import CourseHero from "./CourseHero";
 import CourseReview from "./CourseReview";
+import { addToCart } from "../../redux/actions/cartActions";
 
 function CourseHome() {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [isClick, setIsClick] = useState(false);
   const [isTrue, setIsTrue] = useState(false);
-  const [state, dispatch] = useContext(DataContext);
+  // const [state, dispatch] = useContext(DataContext);
+  const cart = useSelector((state) => state.allCart.cart)
+  const dispatch =useDispatch()
   const handleAddToCart = (singleCourse) => {
-    const exists = state.cart.find((cd) => cd.id === singleCourse.id);
+    const exists = cart.find((cd) => cd.id === singleCourse.id);
     let newCart = [];
     if (exists) {
-      const remaining = state.cart.filter((cd) => cd.id !== singleCourse.id);
+      const remaining = cart.filter((cd) => cd.id !== singleCourse.id);
       exists.quantity = exists.quantity + 1;
       newCart = [...remaining, singleCourse];
     } else {
       singleCourse.quantity = 1;
-      newCart = [...state.cart, singleCourse];
+      newCart = [...cart, singleCourse];
     }
-    dispatch({ type: "cart", value: newCart });
+    dispatch(addToCart(newCart));
     setIsTrue(true);
   };
   setTimeout(() => {
     setIsTrue(false);
   }, 1000);
-  console.log(state.cart);
+  console.log(cart);
   const handleOpen = () => {
     setOpen(true);
   };
