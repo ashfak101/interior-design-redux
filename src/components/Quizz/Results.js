@@ -1,11 +1,13 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { DataContext } from "../../context/DataProvider";
 import QuizzCourse from "./QuizzCourse";
 
 function Results() {
-  const [state] = useContext(DataContext);
+  // const [state] = useContext(DataContext);
+  const allQuiz = useSelector((state) => state.allQuiz);
   const [quizLevel, setQuizLevel] = useState("");
   let arr = [];
   let arr2 = [];
@@ -13,7 +15,7 @@ function Results() {
   let intermediateCount = 0;
   let advancedCount = 0;
 
-  state.quizResults.forEach((element) => {
+  allQuiz.quizResults.forEach((element) => {
     element.options.forEach((option) => {
       if (element.right_answer === option.id && option.checked === true) {
         option.level = element.level;
@@ -52,7 +54,7 @@ function Results() {
   }, [arr, begineerCount, advancedCount, intermediateCount]);
 
   // console.log(quizLevel);
-  console.log(state);
+  console.log(allQuiz);
   return (
     <div>
       <Box>
@@ -60,7 +62,7 @@ function Results() {
           variant="h4"
           sx={{ p: "10px 30px", background: "#bf00ff", color: "#fff" }}
         >
-          Your Score is {arr.length}/{state.quizResults.length}
+          Your Score is {arr.length}/{allQuiz.quizResults.length}
         </Typography>
         <Container maxWidth="xl">
           <Box sx={{ boxShadow: "0px 0px 10px #000", p: 4, mb: 4 }}>

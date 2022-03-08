@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import _ from "lodash";
 import Box from "@mui/material/Box";
 import Answers from "./Answers";
 import { Button, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { DataContext } from "../../context/DataProvider";
+
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuiz, setResults } from "../../redux/actions/quizAction";
 const initialState = {
   loading: false,
   quiz: [],
@@ -33,29 +35,19 @@ const reducer = (state, action) => {
 
 function Quizz() {
   const [quiz, dispatch1] = useReducer(reducer, initialState);
-  const [state, dispatch] = useContext(DataContext);
+  const dispatch = useDispatch()
   const [isDisable, setDisable] = useState(false);
-  // const { res, setRes } = useData();
-
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [quizs, setQuizs] = useState([]);
+ 
   const [currentQ, setCurrentQ] = useState(0);
+  const allQuiz= useSelector(state=>state.allQuiz)
+  useEffect(() => {
+      dispatch(fetchQuiz())
+  }, [dispatch]);
 
   useEffect(() => {
-    setLoading(true);
-    fetch("/quizz.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setQuizs(data);
-        setLoading(false);
-      });
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    dispatch1({ type: "questions", value: quizs });
-  }, [quizs, setQuizs]);
+    dispatch1({ type: "questions", value: allQuiz.quizs });
+  }, [allQuiz.quizs]);
 
   const handleChange = (e, index) => {
     dispatch1({
@@ -67,7 +59,7 @@ function Quizz() {
     setDisable(true);
   };
   const handleNext = () => {
-    if (currentQ + 1 < quizs.length) {
+    if (currentQ + 1 < allQuiz.quizs.length) {
       setCurrentQ((prev) => prev + 1);
     }
     setDisable(false);
@@ -78,10 +70,9 @@ function Quizz() {
       state: { quiz },
     });
   };
-  // setRes(quiz);
 
   useEffect(() => {
-    dispatch({ type: "quizResults", value: quiz });
+     dispatch(setResults(quiz))
   }, [dispatch, quiz]);
   // console.log(currentQ);
   return (
@@ -112,7 +103,7 @@ function Quizz() {
           boxShadow: "0px 0px 10px #000",
         }}
       >
-        {loading && <Box>Loading...</Box>}
+        {allQuiz.loading && <Box>Loading...</Box>}
         {Array.isArray(quiz) && quiz.length && (
           <>
             <Box sx={{ mb: 5 }}>

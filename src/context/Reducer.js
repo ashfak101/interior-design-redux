@@ -11,11 +11,11 @@ export const reducer = (state, action) => {
     //     vat: action.value,
     //   };
 
-    case "finalTotal":
-      return {
-        ...state,
-        finalTotal: action.value,
-      };
+    // case "finalTotal":
+    //   return {
+    //     ...state,
+    //     finalTotal: action.value,
+    //   };
     // case "discount":
     //   return {
     //     ...state,
@@ -28,11 +28,11 @@ export const reducer = (state, action) => {
         results: action.value,
       };
 
-    case "blogs":
-      return {
-        ...state,
-        blogs: action.value,
-      };
+    // case "blogs":
+    //   return {
+    //     ...state,
+    //     blogs: action.value,
+    //   };
 
     case "quizResults":
       return {
