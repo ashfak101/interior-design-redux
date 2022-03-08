@@ -1,8 +1,8 @@
 import { Box, Button, Container, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { DataContext } from "../../context/DataProvider";
+
 import QuizzCourse from "./QuizzCourse";
 
 function Results() {

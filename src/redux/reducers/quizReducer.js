@@ -5,7 +5,7 @@
 const initialState = {
     quizResults: [],
     quizs:[],
-    loading: false,
+    loading: true,
 }
 
 

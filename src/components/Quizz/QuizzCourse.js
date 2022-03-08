@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -9,13 +10,8 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 function QuizzCourse({ quizLevel }) {
-  const [courses, setCourses] = useState([]);
   const [levelCourse, setLevelCourse] = useState([]);
-  useEffect(() => {
-    fetch("/course.json")
-      .then((res) => res.json())
-      .then((data) => setCourses(data));
-  }, []);
+  const courses = useSelector((state) => state.allCourse.courses);
   useEffect(() => {
     const coursesLevel = courses.filter((course) => course.level === quizLevel);
 

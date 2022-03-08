@@ -4,7 +4,7 @@ import CartHome from "./components/CoursePage/CartHome";
 import CourseHome from "./components/CoursePage/CourseHome";
 import Home from "./components/Home/Home/Home";
 import AuthProvider from "./context/AuthProvider";
-import DataProvider from "./context/DataProvider";
+
 
 import Quizz from "./components/Quizz/Quizz";
 import CheckOutHome from "./components/CoursePage/CheckOutHome";
@@ -16,7 +16,7 @@ import SingleBlog from "./components/Blogs/SingleBlog";
 function App() {
   return (
     <AuthProvider>
-      <DataProvider>
+      
         <div>
           <BrowserRouter>
             <ScrollToTop />
@@ -35,7 +35,7 @@ function App() {
             </Routes>
           </BrowserRouter>
         </div>
-      </DataProvider>
+      
     </AuthProvider>
   );
 }

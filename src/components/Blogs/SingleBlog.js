@@ -1,13 +1,13 @@
 import { Box, Container, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import bgImg from "../../images/blogsbg.png";
 import Header from "../Shared/Header/Header";
 import sbgImg from "../../images/sblog.png";
-import { DataContext } from "../../context/DataProvider";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import SingleBlogsDes from "./SingleBlogsDes";
+import { useSelector } from "react-redux";
 const bgImage = {
   background: `url(${bgImg})`,
   backgroundSize: "cover",
@@ -18,21 +18,15 @@ const bgImage = {
 
 function SingleBlog() {
   const { id } = useParams();
-  const [state, dispatch] = useContext(DataContext);
+  // const [state, dispatch] = useContext(DataContext);
+  const blogs = useSelector((state) => state.allBlogs.blogs)
   const [blog, setBlog] = useState({});
-  useEffect(() => {
-    fetch(`/blogs.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: "blogs", value: data });
-      });
-  }, [dispatch]);
-  console.log(state.blogs);
+ ;
 
   useEffect(() => {
-    const singleBlog = state.blogs?.find((blog) => blog.id === id);
+    const singleBlog = blogs?.find((blog) => blog.id === id);
     setBlog(singleBlog);
-  }, [id, state.blogs]);
+  }, [id, blogs]);
   console.log(blog);
   return (
     <>
