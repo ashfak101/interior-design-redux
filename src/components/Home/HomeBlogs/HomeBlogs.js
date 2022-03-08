@@ -30,7 +30,7 @@ function HomeBlogs() {
     <Box sx={bgImage}>
       <Box
         sx={{
-          marginTop: {
+          marginTop: { 
             md: "0",
             lg: "0",
           },
